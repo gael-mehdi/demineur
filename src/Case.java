@@ -87,7 +87,7 @@ public class Case extends JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (gui.GameOver) {
+        if (gui.gameOver) {
             return;
         }
         if (e.getButton() == MouseEvent.BUTTON1) {

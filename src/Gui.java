@@ -42,14 +42,14 @@ public class Gui extends JPanel implements ActionListener {
     public JTextField playerNameField;
 
     private JButton butQuit;
-    private JButton NewGame;
-    public Boolean GameOver = false;
+    private JButton newGame;
+    public Boolean gameOver = false;
     public JLabel textLabel;
     private App app;
     private Champ champ;
-    private JLabel[][] TLabel;
+    private JLabel[][] tLabel;
     private JLabel level;
-    private JComboBox<Level> BoxLevel;
+    private JComboBox<Level> boxLevel;
     public double scoreDixieme = 0;
     private JLabel score;
     private JPanel panelMines;
@@ -73,7 +73,7 @@ public class Gui extends JPanel implements ActionListener {
 
         this.app = app;
         this.champ = champ;
-        this.TLabel = new JLabel[champ.getWidth()][champ.getHeight()];
+        this.tLabel = new JLabel[champ.getWidth()][champ.getHeight()];
         this.setLayout(new BorderLayout());
 
         // création de contenu dans le JPanel
@@ -108,25 +108,25 @@ public class Gui extends JPanel implements ActionListener {
         menuItemLevelHard.addActionListener(this);
         app.setJMenuBar(menuBar);
         textLabel = new JLabel("Démineur");
-        BoxLevel = new JComboBox<>(Level.values());
-        BoxLevel.addActionListener(this);
+        boxLevel = new JComboBox<>(Level.values());
+        boxLevel.addActionListener(this);
         score = new JLabel("Score:" + scoreDixieme);
         level = new JLabel("EASY");
         butQuit = new JButton("Quit");
         butQuit.addActionListener(this);
-        NewGame = new JButton("Nouvelle Partie");
-        NewGame.addActionListener(this);
+        newGame = new JButton("Nouvelle Partie");
+        newGame.addActionListener(this);
 
         // ajout du contenu dans le Panel
         JPanel Nord = new JPanel();
         Nord.add(textLabel);
         Nord.add(level);
-        Nord.add(BoxLevel);
+        Nord.add(boxLevel);
         Nord.add(score);
         add(Nord, BorderLayout.NORTH);
         // Panel Sud
         JPanel Sud = new JPanel();
-        Sud.add(NewGame);
+        Sud.add(newGame);
         Sud.add(butQuit);
         add(Sud, BorderLayout.SOUTH);
         // JPanel des mines
@@ -137,14 +137,14 @@ public class Gui extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == NewGame || e.getSource() == menuItemNewGame) {
+        if (e.getSource() == newGame || e.getSource() == menuItemNewGame) {
             startTime = Instant.now(); // Initialise le timer
-            System.out.println("NewGame\n");
-            app.nouvellePartie(BoxLevel.getSelectedIndex());
+            System.out.println("newGame\n");
+            app.nouvellePartie(boxLevel.getSelectedIndex());
         }
         if (e.getSource() == menuItemLevelEasy || e.getSource() == menuItemLevelMedium || e.getSource() == menuItemLevelHard) {
             LevelPanelMenu(e);
-        } else if (e.getSource() == BoxLevel) {
+        } else if (e.getSource() == boxLevel) {
             LevelPanelComboBox();
         } else if (e.getSource() == butQuit || e.getSource() == menuItemQuit) {
             System.out.println("La taille du champ est :" + champ.getWidth() + "\n");
@@ -166,15 +166,15 @@ public class Gui extends JPanel implements ActionListener {
     public void LevelPanelMenu(ActionEvent e) {
         if (e.getSource() == menuItemLevelEasy) {
             level.setText("EASY");
-            BoxLevel.setSelectedItem(Level.EASY);
+            boxLevel.setSelectedItem(Level.EASY);
             app.nouvellePartie(Level.EASY.ordinal());
         } else if (e.getSource() == menuItemLevelMedium) {
             level.setText("MEDIUM");
-            BoxLevel.setSelectedItem(Level.MEDIUM);
+            boxLevel.setSelectedItem(Level.MEDIUM);
             app.nouvellePartie(Level.MEDIUM.ordinal());
         } else if (e.getSource() == menuItemLevelHard) {
             level.setText("HARD");
-            BoxLevel.setSelectedItem(Level.HARD);
+            boxLevel.setSelectedItem(Level.HARD);
             app.nouvellePartie(Level.HARD.ordinal());
         }
 
@@ -182,11 +182,11 @@ public class Gui extends JPanel implements ActionListener {
     }
 
     public void LevelPanelComboBox() {
-        if (BoxLevel.getSelectedIndex() == 0) {
+        if (boxLevel.getSelectedIndex() == 0) {
             level.setText("EASY");
-        } else if (BoxLevel.getSelectedIndex() == 1) {
+        } else if (boxLevel.getSelectedIndex() == 1) {
             level.setText("MEDIUM");
-        } else if (BoxLevel.getSelectedIndex() == 2) {
+        } else if (boxLevel.getSelectedIndex() == 2) {
             level.setText("HARD");
         }
         app.pack();
@@ -206,7 +206,7 @@ public class Gui extends JPanel implements ActionListener {
     }
 
     void majPanelMines() {
-        this.TLabel = new JLabel[champ.getWidth()][champ.getHeight()];
+        this.tLabel = new JLabel[champ.getWidth()][champ.getHeight()];
         this.tabCase = new Case[champ.getWidth()][champ.getHeight()];
         panelMines.setLayout(new GridLayout(champ.getWidth(), champ.getHeight()));
         System.out.println(String.valueOf(champ.getWidth()));
@@ -234,7 +234,7 @@ public class Gui extends JPanel implements ActionListener {
 
     void revealAllMine() {
         soundPlayer.playSound("lib/GameOverEffect.wav");
-        if (GameOver) {
+        if (gameOver) {
             return;
         }
         for (int i = 0; i < champ.getWidth(); i++) {
@@ -243,7 +243,7 @@ public class Gui extends JPanel implements ActionListener {
                     this.getCase(i, j).reveal();
                 }
             }
-            GameOver = true;
+            gameOver = true;
             textLabel.setText("Game Over!");
         }
         endTime = Instant.now();

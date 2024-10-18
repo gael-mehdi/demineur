@@ -38,7 +38,7 @@ public class App extends JFrame {
     }
 
     public void nouvellePartie(int level) {
-        gui.GameOver = false;
+        gui.gameOver = false;
         champ.nouvellePartie(level);
         gui.nouvellePartie(level);
         gui.textLabel.setText("Démineur");
