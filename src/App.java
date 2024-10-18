@@ -1,0 +1,63 @@
+import java.net.*;
+import java.io.*;
+
+import javax.swing.JFrame;
+
+public class App extends JFrame {
+    private Champ champ;
+    private Gui gui;
+
+    App() {
+        champ = new Champ(6, 6);
+        champ.init();
+        champ.afficherTerminal();
+
+        // creation d'un JPanel : conteneur
+        gui = new Gui(champ, this);
+        gui.majPanelMines();
+
+        // affectation du Jpanel dans le Jframe
+        setContentPane(gui);
+        pack();
+        setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // Appel de la méthode ecranAccueil()
+        gui.ecranAccueil();
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println("Demineur");
+        // connexionReseau();
+        new App();
+    }
+
+    public void quit() {
+        System.exit(0);
+    }
+
+    public void nouvellePartie(int level) {
+        gui.GameOver = false;
+        champ.nouvellePartie(level);
+        gui.nouvellePartie(level);
+        gui.textLabel.setText("Démineur");
+    }
+
+    public void connexionReseau(){
+        try {// ouverture de la socket et des streams
+            Socket sock = new Socket("localhost",10000);
+            DataOutputStream out =new DataOutputStream(sock.getOutputStream());
+            DataInputStream in = new DataInputStream(sock.getInputStream());
+            out.writeUTF(gui.playerNameField.getText());
+            int numJoueur = in.readInt(); // reception d’un nombre
+            System.out.println("Joueur n°:"+numJoueur);
+            in.close(); // fermeture Stream
+            out.close();
+            sock.close() ; // fermeture Socket
+        } catch (UnknownHostException e) {
+            System.out.println("R2D2 est inconnue");
+        } catch (IOException e) {e.printStackTrace();}
+    }
+
+}
