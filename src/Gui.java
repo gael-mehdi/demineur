@@ -221,13 +221,13 @@ public class Gui extends JPanel implements ActionListener {
         for (int i = Math.max(0, x - 1); i <= Math.min(champ.getWidth() - 1, x + 1); i++) {
             for (int j = Math.max(0, y - 1); j <= Math.min(champ.getHeight() - 1, y + 1); j++) {
                 if (tabCase[i][j].clicked == false) {
-                    tabCase[i][j].reveal();
+                    tabCase[i][j].revelerMine();
                 }
             }
         }
     }
 
-    void revealAllMine() {
+    void revelerToutesLesMines() {
         soundPlayer.playSound("ressources/GameOverEffect.wav");
         if (gameOver) {
             return;
@@ -235,7 +235,7 @@ public class Gui extends JPanel implements ActionListener {
         for (int i = 0; i < champ.getWidth(); i++) {
             for (int j = 0; j < champ.getHeight(); j++) {
                 if (champ.isMines(i, j)) {
-                    this.getCase(i, j).reveal();
+                    this.getCase(i, j).revelerMine();
                 }
             }
             gameOver = true;

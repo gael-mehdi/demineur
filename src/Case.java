@@ -5,6 +5,8 @@ import javax.swing.border.LineBorder;
 
 public class Case extends JPanel implements MouseListener {
 
+    private Gui gui;
+
     private int x;
     private int y;
 
@@ -16,8 +18,6 @@ public class Case extends JPanel implements MouseListener {
     public final static int DIM = 50;
     private Color hiddenColor = Color.LIGHT_GRAY;
     private Color revealedColor = Color.WHITE;
-
-    private Gui gui;
 
     private Image bombIcon;
     private Image flagIcon;
@@ -64,7 +64,7 @@ public class Case extends JPanel implements MouseListener {
         }
     }
   
-    public void reveal() {
+    public void revelerMine() {
         if (clicked) {
             return;
         }
@@ -77,7 +77,7 @@ public class Case extends JPanel implements MouseListener {
             gui.updateScoreLabel();
         }
         if (hasMine) {
-            gui.revealAllMine();
+            gui.revelerToutesLesMines();
         }
         repaint();
         gui.checkVictory(); // Vérifier si le joueur a gagné après chaque révélation
@@ -96,7 +96,7 @@ public class Case extends JPanel implements MouseListener {
             return;
         }
         if (e.getButton() == MouseEvent.BUTTON1) {
-            reveal();
+            revelerMine();
         } else if (e.getButton() == MouseEvent.BUTTON3) {
             setIconFlag();
         }
