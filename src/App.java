@@ -8,13 +8,11 @@ public class App extends JFrame {
     private Gui gui;
 
     App() {
-        champ = new Champ(6, 6);
-        champ.init();
-        champ.afficherTerminal();
+        champ = new Champ(6, 6); // champ créé en arrière-plan mais inutile
 
         // creation d'un JPanel : conteneur
         gui = new Gui(champ, this);
-        gui.majPanelMines();
+        // gui.majPanelMines();
 
         // affectation du Jpanel dans le Jframe
         setContentPane(gui);
@@ -28,7 +26,7 @@ public class App extends JFrame {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println("Demineur");
+        System.out.println("Lancement du démineur");
         // connexionReseau();
         new App();
     }

@@ -233,7 +233,7 @@ public class Gui extends JPanel implements ActionListener {
     }
 
     void revealAllMine() {
-        soundPlayer.playSound("lib/GameOverEffect.wav");
+        soundPlayer.playSound("ressources/GameOverEffect.wav");
         if (gameOver) {
             return;
         }

@@ -3,20 +3,25 @@ import java.awt.event.*;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-public class Case extends JPanel implements MouseListener { 
-  
-    public Boolean clicked = false;
-    private Boolean hasMine = false;
-    private int nbAround;
-    private Color hiddenColor = Color.LIGHT_GRAY;
-    public final static int DIM = 50;
-    private Color revealedColor = Color.WHITE;
-    private Gui gui;
+public class Case extends JPanel implements MouseListener {
+
     private int x;
+    private int y;
+
+    private Boolean hasMine = false;
     private boolean hasFlag = false;
+    private int nbAround;
+    public Boolean clicked = false;
+
+    public final static int DIM = 50;
+    private Color hiddenColor = Color.LIGHT_GRAY;
+    private Color revealedColor = Color.WHITE;
+
+    private Gui gui;
+
     private Image bombIcon;
     private Image flagIcon;
-    private int y;
+
 
     public Case(Boolean hasMine, int nbAround, int x, int y, Gui gui) {
         this.x = x;
@@ -29,8 +34,8 @@ public class Case extends JPanel implements MouseListener {
         setBackground(hiddenColor);
         setBorder(new LineBorder(Color.BLACK));
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        bombIcon = toolkit.getImage("lib/BombImage.png");
-        flagIcon = toolkit.getImage("lib/FlagImage.png");
+        bombIcon = toolkit.getImage("ressources/BombImage.png");
+        flagIcon = toolkit.getImage("ressources/FlagImage.png");
     }
     
     @Override

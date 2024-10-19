@@ -10,6 +10,10 @@ public class Serveur {
             // ouverture des streams
             DataInputStream entree = new DataInputStream(socket.getInputStream());
             DataOutputStream sortie = new DataOutputStream(socket.getOutputStream());
+
+            // création d'une partie
+            // Champ champ = new Champ(6, 6);
+
             // lecture d’une donnée
             String nomJoueur = entree.readUTF() ;
             System.out.println(nomJoueur+" connected");
