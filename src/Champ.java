@@ -21,7 +21,7 @@ public class Champ {
         this.tabMines = new boolean [height][width];
     }
 
-    public void afficherTerminal() {
+    public void afficherDansTerminal() {
         for (int i = 0; i < tabMines.length; i++) {
             for (int j = 0; j < tabMines[i].length; j++) { 
                 if(isMines(i,j)){
@@ -70,7 +70,7 @@ public class Champ {
     public void nouvellePartie(int level) {
             tabMines = new boolean[tabSize[level]][tabSize[level]];
             init();
-            afficherTerminal();
+            afficherDansTerminal();
     }
 
 }

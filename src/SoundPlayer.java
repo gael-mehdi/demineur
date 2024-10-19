@@ -1,6 +1,5 @@
 import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class SoundPlayer {
     public void playSound(String filePath) {

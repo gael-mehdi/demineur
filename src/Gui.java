@@ -2,18 +2,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
+import javax.swing.*;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -21,39 +10,45 @@ import java.time.Instant;
  * Graphical user Interface
  */
 public class Gui extends JPanel implements ActionListener {
-    private JMenuBar menuBar;
-    private JMenu menuFichier;
-    private JMenuItem menuItemQuit;
+
+    private App app;
+    private Champ champ;
+    private Case[][] tabCase;
+
+    private JMenuBar menuBar; // Barre de menus
+
+    private JMenu menuFichier; // Menu Fichier
     private JMenuItem menuItemNewGame;
     private JMenu menuLevel;
     private JMenuItem menuItemLevelEasy;
     private JMenuItem menuItemLevelMedium;
     private JMenuItem menuItemLevelHard;
+    private JMenuItem menuItemQuit;
+
+    private JMenu menuReseau; // Menu Réseau
+    private JMenuItem menuLocal;
+    private JMenuItem menuItemReseau;
+
+    public JTextField champNomJoueur;
+
+    public JLabel textLabel;
+    private JLabel[][] tLabel;
+    
+    private JButton butQuit;
+    private JButton newGame;
+
+    private JLabel level;
+    private JComboBox<Level> boxLevel;
+    private JLabel score;
+    private JPanel panelMines;
 
     // Pour le score de la partie
     private Instant startTime;
     private Instant endTime;
     private Instant instTime;
 
-    private JMenu menuReseau;
-    private JMenuItem menuLocal;
-    private JMenuItem menuItemReseau;
-
-    public JTextField playerNameField;
-
-    private JButton butQuit;
-    private JButton newGame;
     public Boolean gameOver = false;
-    public JLabel textLabel;
-    private App app;
-    private Champ champ;
-    private JLabel[][] tLabel;
-    private JLabel level;
-    private JComboBox<Level> boxLevel;
     public double scoreDixieme = 0;
-    private JLabel score;
-    private JPanel panelMines;
-    private Case[][] tabCase;
 
     SoundPlayer soundPlayer = new SoundPlayer();
 
@@ -98,10 +93,10 @@ public class Gui extends JPanel implements ActionListener {
         menuItemReseau.addActionListener(this);
 
         // Ajouter le champ de texte à la barre des menus
-        playerNameField = new JTextField(20);
+        champNomJoueur = new JTextField(20);
         menuBar.add(Box.createHorizontalGlue()); // Pour pousser le champ de texte à droite
         menuBar.add(new JLabel("Nom: "));
-        menuBar.add(playerNameField);
+        menuBar.add(champNomJoueur);
 
         menuItemLevelEasy.addActionListener(this);
         menuItemLevelMedium.addActionListener(this);

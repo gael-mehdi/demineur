@@ -47,7 +47,7 @@ public class App extends JFrame {
             Socket sock = new Socket("localhost",10000);
             DataOutputStream out =new DataOutputStream(sock.getOutputStream());
             DataInputStream in = new DataInputStream(sock.getInputStream());
-            out.writeUTF(gui.playerNameField.getText());
+            out.writeUTF(gui.champNomJoueur.getText());
             int numJoueur = in.readInt(); // reception d’un nombre
             System.out.println("Joueur n°:"+numJoueur);
             in.close(); // fermeture Stream
