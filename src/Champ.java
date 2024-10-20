@@ -1,5 +1,9 @@
 import java.util.Random;
 
+
+/**
+ * Classe Champ
+ */
 public class Champ {
     
     private static final int DEF_HEIGHT = 6;
@@ -14,6 +18,12 @@ public class Champ {
     private double mineProba = 0.25 ;
     Random random = new Random();
 
+
+    /**
+     * Constructeur de la classe Champ
+     * @param height
+     * @param width
+     */
     public Champ(int height,int width){
         this.height = height;
         this.width = width;
@@ -21,6 +31,10 @@ public class Champ {
         this.tabMines = new boolean [height][width];
     }
 
+
+    /**
+     * Affiche le champ dans le terminal
+     */
     public void afficherDansTerminal() {
         for (int i = 0; i < tabMines.length; i++) {
             for (int j = 0; j < tabMines[i].length; j++) { 
@@ -35,10 +49,21 @@ public class Champ {
         }
     }
 
+
+    /**
+     * Retourne si la case est une mine ou non
+     * @param x
+     * @param y
+     * @return
+     */
     public boolean isMines(int x,int y){
         return tabMines[x][y];
     }
 
+
+    /**
+     * Initialise le champ
+     */
     public void init() {
         for (int i = 0; i < tabMines.length; i++) {
             for (int j = 0; j < tabMines[i].length; j++) {
@@ -47,6 +72,13 @@ public class Champ {
         }
     }
 
+
+    /**
+     * Retourne le nombre de mines autour de la case
+     * @param x
+     * @param y
+     * @return
+     */
     public int nombreMinesAutour(int x, int y) {
         int count = 0;
         for (int i = Math.max(0, x - 1); i <= Math.min(tabMines.length - 1, x + 1); i++) {
@@ -59,14 +91,29 @@ public class Champ {
         return count;
     }
 
+
+    /**
+     * Retourne la largeur et la hauteur du champ
+     * @return
+     */
     public int getWidth(){
         return tabMines.length;
     }
     
+
+    /**
+     * Retourne la hauteur du champ
+     * @return
+     */
     public int getHeight(){
         return tabMines.length;
     }
 
+
+    /**
+     * Crée une nouvelle partie
+     * @param level
+     */
     public void nouvellePartie(int level) {
             tabMines = new boolean[tabSize[level]][tabSize[level]];
             init();
