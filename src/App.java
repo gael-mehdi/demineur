@@ -1,6 +1,5 @@
 import java.net.*;
 import java.io.*;
-
 import javax.swing.JFrame;
 
 public class App extends JFrame {
@@ -48,6 +47,11 @@ public class App extends JFrame {
             DataOutputStream out =new DataOutputStream(sock.getOutputStream());
             DataInputStream in = new DataInputStream(sock.getInputStream());
             out.writeUTF(gui.champNomJoueur.getText());
+
+
+            String champReseauJoueur = in.readUTF() ; // Réception du champ par le joueur
+            System.out.println(champReseauJoueur);
+
             int numJoueur = in.readInt(); // reception d’un nombre
             System.out.println("Joueur n°:"+numJoueur);
             in.close(); // fermeture Stream

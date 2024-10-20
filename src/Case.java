@@ -19,8 +19,8 @@ public class Case extends JPanel implements MouseListener {
     private Color hiddenColor = Color.LIGHT_GRAY;
     private Color revealedColor = Color.WHITE;
 
-    private Image bombIcon;
-    private Image flagIcon;
+    private Image bombImage;
+    private Image flagImage;
 
 
     public Case(Boolean hasMine, int nbAround, int x, int y, Gui gui) {
@@ -34,8 +34,8 @@ public class Case extends JPanel implements MouseListener {
         setBackground(hiddenColor);
         setBorder(new LineBorder(Color.BLACK));
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        bombIcon = toolkit.getImage("ressources/BombImage.png");
-        flagIcon = toolkit.getImage("ressources/FlagImage.png");
+        bombImage = toolkit.getImage("ressources/BombImage.png");
+        flagImage = toolkit.getImage("ressources/FlagImage.png");
     }
     
     @Override
@@ -48,7 +48,7 @@ public class Case extends JPanel implements MouseListener {
                 gc.setColor(revealedColor);
                 gc.fillRect(1, 1, getWidth() - 2, getHeight() - 2);
                 gc.setColor(new Color(128, 0, 0));
-                gc.drawImage(bombIcon, 5, 5, getWidth() - 10, getHeight() - 10, this);
+                gc.drawImage(bombImage, 5, 5, getWidth() - 10, getHeight() - 10, this);
             } else if (this.nbAround > 0) {
                 gc.setColor(revealedColor);
                 gc.fillRect(1, 1, getWidth() - 2, getHeight() - 2);
@@ -60,7 +60,7 @@ public class Case extends JPanel implements MouseListener {
             }
         }
         if (hasFlag) {
-            gc.drawImage(flagIcon, 5, 5, getWidth() - 10, getHeight() - 10, this);
+            gc.drawImage(flagImage, 5, 5, getWidth() - 10, getHeight() - 10, this);
         }
     }
   

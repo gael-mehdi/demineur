@@ -11,14 +11,16 @@ public class Serveur {
             DataInputStream entree = new DataInputStream(socket.getInputStream());
             DataOutputStream sortie = new DataOutputStream(socket.getOutputStream());
 
-            // création d'une partie
-            // Champ champ = new Champ(6, 6);
-
             // lecture d’une donnée
             String nomJoueur = entree.readUTF() ;
             System.out.println(nomJoueur+" connected");
             // envoi d ’une donnée : 0 par exemple
             sortie.writeInt(0);
+
+            // création d'une partie
+            Champ champReseau = new Champ(6, 6);
+            sortie.writeUTF(champReseau.toString());
+            
             // un peu de ménage
             sortie.close() ;
             entree.close() ;
