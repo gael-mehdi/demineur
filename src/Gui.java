@@ -6,8 +6,9 @@ import javax.swing.*;
 import java.time.Duration;
 import java.time.Instant;
 
+
 /**
- * Graphical user Interface
+ * Classe Gui
  */
 public class Gui extends JPanel implements ActionListener {
 
@@ -52,6 +53,12 @@ public class Gui extends JPanel implements ActionListener {
 
     SoundPlayer soundPlayer = new SoundPlayer();
 
+
+    /**
+     * Constructeur de la classe Gui
+     * @param champ
+     * @param app
+     */
     Gui(Champ champ, App app) {
         menuBar = new JMenuBar();
         menuFichier = new JMenu("Fichier");
@@ -130,6 +137,11 @@ public class Gui extends JPanel implements ActionListener {
         add(panelMines);
     }
 
+
+    /**
+     * Méthode actionPerformed
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == newGame || e.getSource() == menuItemNewGame) {
@@ -151,6 +163,11 @@ public class Gui extends JPanel implements ActionListener {
         }
     }
 
+
+    /**
+     * Méthode nouvellePartie
+     * @param level
+     */
     public void nouvellePartie(int level) {
         score.setText("0");
         panelMines.removeAll();
@@ -158,6 +175,11 @@ public class Gui extends JPanel implements ActionListener {
         app.pack();
     }
 
+
+    /**
+     * Méthode LevelPanelMenu
+     * @param e
+     */
     public void LevelPanelMenu(ActionEvent e) {
         if (e.getSource() == menuItemLevelEasy) {
             level.setText("EASY");
@@ -176,6 +198,10 @@ public class Gui extends JPanel implements ActionListener {
         app.pack();
     }
 
+
+    /**
+     * Méthode LevelPanelComboBox
+     */
     public void LevelPanelComboBox() {
         if (boxLevel.getSelectedIndex() == 0) {
             level.setText("EASY");
@@ -187,10 +213,21 @@ public class Gui extends JPanel implements ActionListener {
         app.pack();
     }
 
+
+    /**
+     * Méthode getCase
+     * @param x
+     * @param y
+     * @return
+     */
     public Case getCase(int x, int y) {
         return tabCase[x][y];
     }
 
+
+    /**
+     * Méthode updateScoreLabel
+     */
     public void updateScoreLabel() {
         instTime = Instant.now();
         long timeElapsedMillis = Duration.between(startTime, instTime).toMillis();
@@ -200,6 +237,10 @@ public class Gui extends JPanel implements ActionListener {
         score.setText("Score: " + scoreDixieme);
     }
 
+
+    /**
+     * Méthode majPanelMines
+     */
     void majPanelMines() {
         this.tLabel = new JLabel[champ.getWidth()][champ.getHeight()];
         this.tabCase = new Case[champ.getWidth()][champ.getHeight()];
@@ -217,6 +258,11 @@ public class Gui extends JPanel implements ActionListener {
         app.pack();
     }
 
+    /**
+     * Méthode propagation
+     * @param x
+     * @param y
+     */
     void propagation(int x, int y) {
         for (int i = Math.max(0, x - 1); i <= Math.min(champ.getWidth() - 1, x + 1); i++) {
             for (int j = Math.max(0, y - 1); j <= Math.min(champ.getHeight() - 1, y + 1); j++) {
@@ -227,6 +273,10 @@ public class Gui extends JPanel implements ActionListener {
         }
     }
 
+
+    /**
+     * Méthode qui révèle toutes les mines
+     */
     void revelerToutesLesMines() {
         soundPlayer.playSound("ressources/GameOverEffect.wav");
         if (gameOver) {
@@ -247,6 +297,10 @@ public class Gui extends JPanel implements ActionListener {
         System.out.printf("Temps écoulé: %.1f secondes%n", timeElapsedSeconds);
     }
 
+
+    /**
+     * Méthode ecranAccueil
+     */
     public void ecranAccueil() {
         // Retirer la grille de mines
         panelMines.removeAll();
@@ -271,6 +325,10 @@ public class Gui extends JPanel implements ActionListener {
         app.pack();
     }
 
+
+    /**
+     * Méthode checkVictory
+     */
     public void checkVictory() {
         for (int i = 0; i < champ.getWidth(); i++) {
             for (int j = 0; j < champ.getHeight(); j++) {
@@ -288,6 +346,10 @@ public class Gui extends JPanel implements ActionListener {
         System.out.printf("Temps écoulé: %.1f secondes%n", timeElapsedSeconds);
     }
 
+
+    /**
+     * Méthode ecranBravo
+     */
     public void ecranBravo(){
         // Retirer la grille de mines
         panelMines.removeAll();

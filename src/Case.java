@@ -3,6 +3,10 @@ import java.awt.event.*;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+
+/**
+ * Classe Case
+ */
 public class Case extends JPanel implements MouseListener {
 
     private Gui gui;
@@ -23,6 +27,14 @@ public class Case extends JPanel implements MouseListener {
     private Image flagImage;
 
 
+    /**
+     * Constructeur de la classe Case
+     * @param hasMine
+     * @param nbAround
+     * @param x
+     * @param y
+     * @param gui
+     */
     public Case(Boolean hasMine, int nbAround, int x, int y, Gui gui) {
         this.x = x;
         this.y = y;
@@ -38,6 +50,11 @@ public class Case extends JPanel implements MouseListener {
         flagImage = toolkit.getImage("ressources/FlagImage.png");
     }
     
+    
+    /**
+     * Peindre le composant
+     * @param gc
+     */
     @Override
     public void paintComponent(Graphics gc) {
         super.paintComponent(gc);
@@ -64,6 +81,10 @@ public class Case extends JPanel implements MouseListener {
         }
     }
   
+
+    /**
+     * Révéler la mine
+     */
     public void revelerMine() {
         if (clicked) {
             return;
@@ -83,6 +104,10 @@ public class Case extends JPanel implements MouseListener {
         gui.checkVictory(); // Vérifier si le joueur a gagné après chaque révélation
     }
 
+
+    /**
+     * Mettre un drapeau
+     */
     public void setIconFlag() {
         if (!clicked) {  
             hasFlag = !hasFlag;  
@@ -90,6 +115,11 @@ public class Case extends JPanel implements MouseListener {
         }
     }
 
+
+    /**
+     * Méthode mouseClicked
+     * @param e
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         if (gui.gameOver) {
