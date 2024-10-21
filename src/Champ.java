@@ -77,6 +77,25 @@ public class Champ implements Serializable {
 
 
     /**
+     * Initialise le champ pour ne pas placer une bombe sur le premier click
+     * @param initialRow
+     * @param initialCol
+     */
+    public void init(int initialRow, int initialCol) {
+        for (int i = 0; i < tabMines.length; i++) {
+            for (int j = 0; j < tabMines[i].length; j++) {
+                // Éviter de placer une bombe à la position initiale du joueur
+                if (i == initialRow && j == initialCol) {
+                    this.tabMines[i][j] = false;
+                } else {
+                    this.tabMines[i][j] = Math.random() > 1 - mineProba;
+                }
+            }
+        }
+    }
+
+
+    /**
      * Retourne le nombre de mines autour de la case
      * @param x
      * @param y

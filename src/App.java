@@ -38,6 +38,7 @@ public class App extends JFrame {
         System.out.println("Lancement du démineur");
         // connexionReseau();
         new App();
+        new Serveur();
     }
 
 
