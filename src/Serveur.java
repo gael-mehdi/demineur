@@ -1,3 +1,10 @@
+/**
+ * Serveur.java
+ * @author: Gaël-Mehdi
+ * @version: 1.0
+ */
+
+
 import java.net.*; // Sockets
 import java.io.*; // Streams
 

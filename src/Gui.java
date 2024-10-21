@@ -1,3 +1,10 @@
+/**
+ * Gui.java
+ * @author: Gaël-Mehdi
+ * @version: 1.0
+ */
+
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -102,7 +109,7 @@ public class Gui extends JPanel implements ActionListener {
         // Ajouter le champ de texte à la barre des menus
         champNomJoueur = new JTextField(20);
         menuBar.add(Box.createHorizontalGlue()); // Pour pousser le champ de texte à droite
-        menuBar.add(new JLabel("Nom: "));
+        menuBar.add(new JLabel("Nom :"));
         menuBar.add(champNomJoueur);
 
         menuItemLevelEasy.addActionListener(this);
@@ -154,7 +161,6 @@ public class Gui extends JPanel implements ActionListener {
         } else if (e.getSource() == boxLevel) {
             LevelPanelComboBox();
         } else if (e.getSource() == butQuit || e.getSource() == menuItemQuit) {
-            System.out.println("La taille du champ est :" + champ.getWidth() + "\n");
             app.quit();
         } else if (e.getSource() == menuLocal) {
             System.out.println("Jouer en local\n");

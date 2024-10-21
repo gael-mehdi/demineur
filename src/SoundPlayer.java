@@ -1,3 +1,10 @@
+/**
+ * SoundPlayer.java
+ * @author: Gaël-Mehdi
+ * @version: 1.0
+ */
+
+
 import javax.sound.sampled.*;
 import java.io.*;
 

@@ -1,3 +1,10 @@
+/**
+ * Case.java
+ * @author: Gaël-Mehdi
+ * @version: 1.0
+ */
+
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JPanel;

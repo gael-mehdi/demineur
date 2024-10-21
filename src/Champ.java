@@ -1,3 +1,10 @@
+/**
+ * Champ.java
+ * @author: Gaël-Mehdi
+ * @version: 1.0
+ */
+
+
 import java.util.Random;
 import java.io.Serializable;
 
@@ -142,6 +149,5 @@ public class Champ implements Serializable {
             afficherDansTerminal();
     }
 
-    
 
 }
