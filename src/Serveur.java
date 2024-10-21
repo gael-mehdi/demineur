@@ -1,36 +1,44 @@
-import java.net.* ; // Sockets
-import java.io.* ; // Streams
+import java.net.*; // Sockets
+import java.io.*; // Streams
 
 public class Serveur {
     Serveur() {
-        System.out.println("Démarrage du serveur") ;
-        try {// gestionnaire de socket, port 10000
-            ServerSocket gestSock=new ServerSocket(10000);
-            Socket socket=gestSock.accept() ; //attente
+        System.out.println("Démarrage du serveur");
+        try {
+            // gestionnaire de socket, port 10000
+            ServerSocket gestSock = new ServerSocket(10000);
+            Socket socket = gestSock.accept(); // attente
+
             // ouverture des streams
             DataInputStream entree = new DataInputStream(socket.getInputStream());
             DataOutputStream sortie = new DataOutputStream(socket.getOutputStream());
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
             // lecture d’une donnée
-            String nomJoueur = entree.readUTF() ;
-            System.out.println(nomJoueur+" connected");
-            // envoi d ’une donnée : 0 par exemple
+            String nomJoueur = entree.readUTF();
+            System.out.println(nomJoueur + " connected");
+
+            // envoi d’une donnée : 0 par exemple
             sortie.writeInt(0);
 
             // création d'une partie
-            Champ champReseau = new Champ(6, 6);
-            sortie.writeUTF(champReseau.toString());
-            
+            Champ champReseau = new Champ(5, 5);
+            champReseau.init();
+            champReseau.afficherDansTerminal();
+            objectOutputStream.writeObject(champReseau);
+
             // un peu de ménage
-            sortie.close() ;
-            entree.close() ;
+            objectOutputStream.close();
+            sortie.close();
+            entree.close();
             socket.close();
-            gestSock.close() ;
+            gestSock.close();
         } catch (IOException e) {
-            e.printStackTrace( );
+            e.printStackTrace();
         }
-    }   
-    public static void main(String[] args){
-        new Serveur() ;
+    }
+
+    public static void main(String[] args) {
+        new Serveur();
     }
 }

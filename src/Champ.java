@@ -1,10 +1,13 @@
 import java.util.Random;
+import java.io.Serializable;
 
 
 /**
  * Classe Champ
  */
-public class Champ {
+public class Champ implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     
     private static final int DEF_HEIGHT = 6;
     private static final int DEF_WIDTH = 6;
@@ -119,5 +122,7 @@ public class Champ {
             init();
             afficherDansTerminal();
     }
+
+    
 
 }

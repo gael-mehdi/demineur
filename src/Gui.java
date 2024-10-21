@@ -226,6 +226,15 @@ public class Gui extends JPanel implements ActionListener {
 
 
     /**
+     * Méthode setChamp
+     * @param champ
+     */
+    public void setChamp(Champ champ) {
+        this.champ = champ;
+    }
+
+
+    /**
      * Méthode updateScoreLabel
      */
     public void updateScoreLabel() {
@@ -299,6 +308,27 @@ public class Gui extends JPanel implements ActionListener {
 
 
     /**
+     * Méthode checkVictory
+     */
+    public void checkVictory() {
+        for (int i = 0; i < champ.getWidth(); i++) {
+            for (int j = 0; j < champ.getHeight(); j++) {
+                Case currentCase = this.getCase(i, j);
+                if (!currentCase.clicked && !champ.isMines(i, j)) {
+                    return; // Il reste des cases non découvertes qui ne sont pas des mines
+                }
+            }
+        }
+        // Si toutes les cases non découvertes sont des mines, le joueur a gagné
+        ecranBravo();
+        endTime = Instant.now();
+        long timeElapsedMillis = Duration.between(startTime, endTime).toMillis();
+        double timeElapsedSeconds = timeElapsedMillis / 1000.0;
+        System.out.printf("Temps écoulé: %.1f secondes%n", timeElapsedSeconds);
+    }
+
+
+    /**
      * Méthode ecranAccueil
      */
     public void ecranAccueil() {
@@ -323,27 +353,6 @@ public class Gui extends JPanel implements ActionListener {
 
         // Redimensionner la fenêtre pour s'adapter au contenu
         app.pack();
-    }
-
-
-    /**
-     * Méthode checkVictory
-     */
-    public void checkVictory() {
-        for (int i = 0; i < champ.getWidth(); i++) {
-            for (int j = 0; j < champ.getHeight(); j++) {
-                Case currentCase = this.getCase(i, j);
-                if (!currentCase.clicked && !champ.isMines(i, j)) {
-                    return; // Il reste des cases non découvertes qui ne sont pas des mines
-                }
-            }
-        }
-        // Si toutes les cases non découvertes sont des mines, le joueur a gagné
-        ecranBravo();
-        endTime = Instant.now();
-        long timeElapsedMillis = Duration.between(startTime, endTime).toMillis();
-        double timeElapsedSeconds = timeElapsedMillis / 1000.0;
-        System.out.printf("Temps écoulé: %.1f secondes%n", timeElapsedSeconds);
     }
 
 

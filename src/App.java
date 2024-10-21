@@ -65,24 +65,38 @@ public class App extends JFrame {
      * Méthode connexionReseau
      */
     public void connexionReseau(){
-        try {// ouverture de la socket et des streams
-            Socket sock = new Socket("localhost",10000);
-            DataOutputStream out =new DataOutputStream(sock.getOutputStream());
-            DataInputStream in = new DataInputStream(sock.getInputStream());
-            out.writeUTF(gui.champNomJoueur.getText());
+        try {
+            Socket socket = new Socket("localhost", 10000);
 
+            // ouverture des streams
+            DataInputStream entree = new DataInputStream(socket.getInputStream());
+            DataOutputStream sortie = new DataOutputStream(socket.getOutputStream());
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-            String champReseauJoueur = in.readUTF() ; // Réception du champ par le joueur
-            System.out.println(champReseauJoueur);
+            // envoi d’une donnée
+            sortie.writeUTF("Joueur1");
 
-            int numJoueur = in.readInt(); // reception d’un nombre
-            System.out.println("Joueur n°:"+numJoueur);
-            in.close(); // fermeture Stream
-            out.close();
-            sock.close() ; // fermeture Socket
-        } catch (UnknownHostException e) {
-            System.out.println("R2D2 est inconnue");
-        } catch (IOException e) {e.printStackTrace();}
+            // lecture d’une donnée
+            int response = entree.readInt();
+            System.out.println("Réponse du serveur: " + response);
+
+            // réception de l'objet Champ
+            Champ champReseau = (Champ) objectInputStream.readObject();
+            System.out.println("Champ reçu: " + champReseau);
+
+            // mise à jour du champ et de l'interface graphique
+            this.champ = champReseau;
+            gui.setChamp(champReseau);
+            gui.majPanelMines();
+
+            // un peu de ménage
+            objectInputStream.close();
+            sortie.close();
+            entree.close();
+            socket.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }
