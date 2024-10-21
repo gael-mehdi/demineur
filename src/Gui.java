@@ -253,6 +253,7 @@ public class Gui extends JPanel implements ActionListener {
     void majPanelMines() {
         this.tLabel = new JLabel[champ.getWidth()][champ.getHeight()];
         this.tabCase = new Case[champ.getWidth()][champ.getHeight()];
+        panelMines.removeAll();
         panelMines.setLayout(new GridLayout(champ.getWidth(), champ.getHeight()));
         System.out.println(String.valueOf(champ.getWidth()));
         System.out.println(String.valueOf(champ.getHeight()));

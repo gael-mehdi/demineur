@@ -87,6 +87,7 @@ public class App extends JFrame {
             // mise à jour du champ et de l'interface graphique
             this.champ = champReseau;
             gui.setChamp(champReseau);
+            this.champ.afficherDansTerminal();
             gui.majPanelMines();
 
             // un peu de ménage
